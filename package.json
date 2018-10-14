@@ -1,6 +1,7 @@
 {
   "name": "tht-jg",
   "version": "0.1.0",
+  "homepage": "https://dconroy.github.io/THT-JG",
   "private": true,
   "dependencies": {
     "react": "^16.5.2",
