@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const BTCPrice = (props) => {
 	// console.log(props)
-	return <div><p>1 BTC = {props.btc_price} USD </p></div>;
+	return <div><p>1 BTC = ${props.btc_price} USD </p></div>;
 }
 
 // function mapStateToProps(state){

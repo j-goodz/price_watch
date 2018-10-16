@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+        <p>Price updates every {this.state.interval} seconds.</p>
         <BTCPrice btc_price={this.state.btc_price} />
         <ETHPrice eth_price={this.state.eth_price} />
 
