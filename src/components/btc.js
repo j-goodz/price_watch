@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import { connect } from 'react-redux';
 
 const BTCPrice = (props) => {
-	console.log(props)
+	// console.log(props)
 	return <div><p>1 BTC = {props.btc_price} USD </p></div>;
 }
 
