@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionCreators from './actions/index';
-import './App.css';
 import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
+import './App.css';
 
 
 class App extends Component {

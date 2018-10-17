@@ -2,7 +2,7 @@
 let defaultState = {
       send_addr: '0xcfA3c2407a547fC5cd248BBF43b829096a60Fcc0',
       timer: null,
-      interval: 4,
+      interval: 60,
       counter: 0,
       btc_price: 0,
       eth_price: 0
