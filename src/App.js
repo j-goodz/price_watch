@@ -9,24 +9,30 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        timer: null
+      }
     this.tick = this.tick.bind(this)
   }
 
   async componentDidMount() {
     let timer = setInterval(this.tick, 1000 * this.props.interval)
     this.setState({timer})
-    this.props.fetchBTCPrice()
-    this.props.fetchETHPrice()
+    this.refreshPrice()
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.props.timer)
+    this.clearInterval(this.state.timer)
+  }
+
+  refreshPrice() {
+    this.props.fetchBTCPrice()
+    this.props.fetchETHPrice()
+    console.log("refreshed price!")
   }
 
   tick() {
-    this.setState({counter: this.props.counter + 1})
-    this.props.fetchBTCPrice()
-    this.props.fetchETHPrice()
+    this.refreshPrice()
   }
 
   render() {
