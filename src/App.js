@@ -4,6 +4,7 @@ import * as actionCreators from './actions/index';
 import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
 import RefreshButton from './containers/refresh-button';
+import TransferButton from './containers/transfer-button';
 import './App.css';
 
 
@@ -42,8 +43,17 @@ class App extends Component {
         <p>Price updates every {this.props.interval} seconds.</p>
         <BTCPrice btc_price={this.props.btc_price} />
         <ETHPrice eth_price={this.props.eth_price} />
+
         <br />
         <RefreshButton props={this.refreshPrice} />
+
+
+
+
+        <br />
+        <TransferButton />
+
+
       </div>
     );
   }
