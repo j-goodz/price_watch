@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from './actions/index';
 import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
+import TransferButton from './containers/transfer-button';
 import './App.css';
 
 
@@ -41,6 +42,12 @@ class App extends Component {
         <p>Price updates every {this.props.interval} seconds.</p>
         <BTCPrice btc_price={this.props.btc_price} />
         <ETHPrice eth_price={this.props.eth_price} />
+
+
+
+        <br />
+        <TransferButton />
+
       </div>
     );
   }
