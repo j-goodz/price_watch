@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from './actions/index';
 import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
-import RefreshButton from './components/refresh-button';
+import RefreshButton from './containers/refresh-button';
 import './App.css';
 
 
