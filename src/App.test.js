@@ -6,15 +6,10 @@ import configureStore from 'redux-mock-store';
 import App from './App';
 import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
-// import RefreshButton from './containers/refresh-button';
 import { RefreshButton } from './containers/refresh-button';
 import { TransferButton } from './containers/transfer-button';
 import { updateBTCPrice, updateETHPrice } from './actions/index';
-// import updateBTCPrice from ;
-//import * as actionCreators from './actions/index';
 
-import chai from 'chai'
-import chaiEnzyme from 'chai-enzyme'
 
 const initialState = {
 	interval: 60,
@@ -28,7 +23,8 @@ const expected_btc_price = 500
 const mockStore = configureStore()
 let store, appWrapper, btcWrapper, ethWrapper, refreshWrapper, transWrapper, onButtonClick, mockFetchBTCPrice, mockFetchETHPrice
 
-beforeEach( () => {
+
+beforeEach( () => { 
 	mockFetchBTCPrice = jest.fn(); 
 	mockFetchETHPrice = jest.fn();
 	store = mockStore(initialState)
@@ -36,7 +32,7 @@ beforeEach( () => {
 	btcWrapper = shallow(<BTCPrice btc_price={ expected_btc_price } />)
 	ethWrapper = shallow(<ETHPrice eth_price={ expected_eth_price } />)
 	refreshWrapper = shallow(<RefreshButton fetchBTCPrice={mockFetchBTCPrice} fetchETHPrice={mockFetchETHPrice} />)
-	transWrapper = shallow(<RefreshButton store={store}  />)
+	// transWrapper = shallow(<TransferButton store={store}  />)
 })
 
 
@@ -57,11 +53,12 @@ describe('Components render without failing', () => {
 		expect(refreshWrapper.length).toEqual(1)
 	});
 
-	it('renders the TransferButton component', () => {
-		expect(transWrapper.length).toEqual(1)
-	});
+	// it('renders the TransferButton component', () => {
+	// 	expect(transWrapper.length).toEqual(1)
+	// });
 
 })
+
 
 describe('Renders crypto price text/string', () => {
 	it('renders btc text/string', () => {
@@ -98,7 +95,6 @@ describe('ActionCreator creates actions correctly', () => {
 })
 
 
-// ---------------------------------------------------------------------------------------
 describe('Verifies button onclick events are called', () => {  
   it('simulates Refresh Price onclick events', () => {
     refreshWrapper.find('button').simulate('click')
