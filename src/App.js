@@ -54,7 +54,8 @@ class App extends Component {
 }
 
 const mapStateToProps=(state) => {
-  return state
+  const { btc_price, eth_price, interval } = state
+  return { btc_price, eth_price, interval }
 };
 
 export default connect (mapStateToProps, actionCreators)(App);
