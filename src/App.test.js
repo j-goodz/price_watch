@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow, mount, render } from 'enzyme';
-import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 import App from './App';
 import BTCPrice from './components/btc';
