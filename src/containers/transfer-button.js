@@ -54,7 +54,8 @@ class TransferButton extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state
+	const { btc_price, eth_price, send_addr } = state
+  	return { btc_price, eth_price, send_addr }
 }
 
 export default connect (mapStateToProps)(TransferButton)
