@@ -7,7 +7,11 @@ import ETHPrice from './components/eth';
 import { RefreshButton } from './containers/refresh-button';
 import { TransferButton } from './containers/transfer-button';
 import { updateBTCPrice, updateETHPrice } from './actions/index';
-
+// import { findAttr, checkProps } from './tests/test.Lib';
+// import checkPropTypes from 'check-prop-types'
+import axios from 'axios';
+import moxios from 'moxios';
+import sinon from 'sinon';
 
 const initialState = {
 	interval: 60,
@@ -19,25 +23,33 @@ const expected_eth_price = 50
 const expected_btc_price = 500
 
 const mockStore = configureStore()
-let store, appWrapper, btcWrapper, ethWrapper, refreshWrapper, transWrapper, onButtonClick, mockFetchBTCPrice, mockFetchETHPrice
+let store, appWrapper, btcWrapper, ethWrapper, refreshWrapper, transWrapper, mockFetchBTCPrice, mockFetchETHPrice, onFulfilled, onRejected
 
 
 beforeEach( () => { 
-	mockFetchBTCPrice = jest.fn(); 
-	mockFetchETHPrice = jest.fn();
+	mockFetchBTCPrice = jest.fn()
+	mockFetchETHPrice = jest.fn()
 	store = mockStore(initialState)
 	appWrapper = shallow(<App store={store} />)
 	btcWrapper = shallow(<BTCPrice btc_price={ expected_btc_price } />)
 	ethWrapper = shallow(<ETHPrice eth_price={ expected_eth_price } />)
 	refreshWrapper = shallow(<RefreshButton fetchBTCPrice={mockFetchBTCPrice} fetchETHPrice={mockFetchETHPrice} />)
 	// transWrapper = shallow(<TransferButton store={store}  />)
+	onFulfilled = sinon.spy()
+	onRejected = sinon.spy()
 })
+
 
 
 describe('Components render without failing', () => {
 	it('renders the App component', () => {
 		expect(appWrapper.length).toEqual(1)
 	});
+
+	it('renders the interval statement', () => {
+		const statement = appWrapper.find('p')
+		expect(statement.dive().text()).toContain("Price updates every")
+	})
 
 	it('renders the BTCPrice component', () => {
 		expect(btcWrapper.length).toEqual(1)
@@ -54,7 +66,6 @@ describe('Components render without failing', () => {
 	// it('renders the TransferButton component', () => {
 	// 	expect(transWrapper.length).toEqual(1)
 	// });
-
 })
 
 
@@ -89,15 +100,67 @@ describe('ActionCreator creates actions correctly', () => {
         }
         expect(action).toEqual(expected)
     })
-
 })
 
 
 describe('Verifies button onclick events are called', () => {  
   it('simulates Refresh Price onclick events', () => {
     refreshWrapper.find('button').simulate('click')
-    expect(mockFetchBTCPrice).toHaveBeenCalled();
-    expect(mockFetchETHPrice).toHaveBeenCalled();
-  });
+    expect(mockFetchBTCPrice).toHaveBeenCalled()
+    expect(mockFetchETHPrice).toHaveBeenCalled()
+  })
 })
 
+
+describe('Moxios', () => {
+	it('installs', () => { // This seems to work fine.
+		let defaultAdapter = axios.defaults.adapter
+		moxios.install()
+		expect(axios.defaults.adapter).not.toBe(defaultAdapter)
+		moxios.uninstall()
+	  })
+
+	it('uninstalls', () => {
+        const defaultAdapter = axios.defaults.adapter
+        moxios.install()
+		moxios.uninstall()
+		expect(axios.defaults.adapter).toBe(defaultAdapter)
+	})
+	
+	it('executes requests', (done) => {
+        moxios.install()
+		axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot')
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent()
+			expect(moxios.requests.count()).toEqual(1)
+			done()
+		})
+	})
+
+	it('mocks responses', (done) => {
+		axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot').then(onFulfilled)
+
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent()
+			request.respondWith({ status: 200, response: expected_btc_price	}).then(() => {
+				const response = onFulfilled.getCall(0).args[0]
+				expect(onFulfilled.called).toBeTruthy
+				expect(response.status).toEqual(200)
+				expect(response.data).toEqual(expected_btc_price)
+				done();
+			})
+		})
+	})
+
+	it('mocks 404 error responses', (done) => {
+		axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot').then(onFulfilled, onRejected)
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent()
+			request.respondWith({ status: 404 }).then(() => {
+				expect(onFulfilled.called).toEqual(false)
+				expect(onRejected.called).toEqual(true)
+				done();
+			})
+		})
+	})
+})
