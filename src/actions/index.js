@@ -18,6 +18,15 @@ export function fetchETHPrice(){
 	}
 }
 
+export function fetchPriceHist(){
+	return(dispatch) => {
+		return axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=365&aggregate=1&e=CCCAGG&UTCHourDiff=-4').then((res) => {
+			// dispatch(updateETHPrice(res.data.data.amount));
+			 console.log("price hist: ", res.data.Data)
+		})
+	}
+}
+
 
 
 export function updateBTCPrice(amount){
