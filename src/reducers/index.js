@@ -4,15 +4,17 @@ let defaultState = {
     interval: 60,
     btc_price: 0,
 	eth_price: 0,
-	price_hist: [],
-	recommendation: null,
-	peak_price: 0,
-	m1_peak_price: 0,
-	m2_peak_price: 0,
-	m3_peak_price: 0,
-	m4_peak_price: 0,
-	m5_peak_price: 0
-    };
+	price_hist : [],
+	snapshots: {
+		peak_price: 0,
+		m1_price: 0,
+		m2_price: 0,
+		m3_price: 0,
+		m4_price: 0,
+		m5_price: 0,
+		m6_price: 0
+	}
+}
 
 const mainReducer = (state = defaultState, action) => {
 
@@ -26,6 +28,16 @@ const mainReducer = (state = defaultState, action) => {
 			...state,
 			eth_price: action.eth_price
 		}
+	} else if(action.type === 'UPDATE_PRICE_HIST') {
+		return{
+			...state,
+			price_hist: action.price_hist
+		}
+	} else if(action.type === 'UPDATE_PRICE_SNAPSHOTS') {
+		return{
+			...state,
+			snapshots: action.snapshots
+		}
 	} else {
 		return{
 			...state
@@ -34,4 +46,5 @@ const mainReducer = (state = defaultState, action) => {
 
 }
 
-export default mainReducer;
+export default mainReducer
+
