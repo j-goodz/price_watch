@@ -8,7 +8,7 @@ import './App.css';
 
 
 class App extends Component {
-  constructor(props) {
+  constructor(props) { 
     super(props);
     this.state = {
         timer: null
@@ -26,10 +26,9 @@ class App extends Component {
     this.clearInterval(this.state.timer)
   }
 
-  async refreshPrice() {
+  refreshPrice() {
     this.props.fetchBTCPrice()
     this.props.fetchETHPrice()
-    this.props.fetchPriceHist()
     console.log("refreshed price!")
   }
 

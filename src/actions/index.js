@@ -1,8 +1,5 @@
 import axios from 'axios';
 import moment from 'moment';
-import ReduxThunk from 'redux-thunk'
-
-const store = createStore(applyMiddleware(ReduxThunk));
 
 
 export function fetchBTCPrice(){
