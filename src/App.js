@@ -30,8 +30,6 @@ class App extends Component {
     this.props.fetchBTCPrice()
     this.props.fetchETHPrice()
     this.props.fetchPriceHist()
-    // this.props.setPriceSnapshots()
-
     console.log("refreshed price!")
   }
 

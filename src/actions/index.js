@@ -1,5 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
+import ReduxThunk from 'redux-thunk'
+
+const store = createStore(applyMiddleware(ReduxThunk));
+
 
 export function fetchBTCPrice(){
 	return(dispatch) => {
@@ -32,14 +36,16 @@ export function fetchPriceHist(){
 			dispatch(updatePriceHist(tempData));
 
 			let tempPrice = 0
+			let tempDate = null
 			for (let i = tempData.length-1; i >= 0; i--) {
 				if (tempPrice < tempData[i].close) {
+					tempDate = tempData[i].date
 					tempPrice = tempData[i].close
 				}
 			}
 
 			let snapshots = {
-				peak_price: tempPrice,
+				peak_price: { date: tempDate, close: tempPrice },
 				m1_price: tempData[tempData.length-30],
 				m2_price: tempData[tempData.length-60],
 				m3_price: tempData[tempData.length-90],
