@@ -8,13 +8,11 @@ import ETHPrice from './components/eth';
 import { RefreshButton } from './containers/refresh-button';
 import { TransferButton } from './containers/transfer-button';
 import { updateBTCPrice, updateETHPrice } from './actions/index';
-// import { findAttr, checkProps } from './tests/test.Lib';
-// import checkPropTypes from 'check-prop-types'
 import axios from 'axios';
 import moxios from 'moxios';
 import sinon from 'sinon';
-import Web3 from 'web3';
-import FakeProvider from 'web3-fake-provider';
+// import Web3 from 'web3';
+// import FakeProvider from 'web3-fake-provider';
 
 const initialState = {
 	interval: 60,
@@ -22,9 +20,9 @@ const initialState = {
 	eth_price: 0
 }
 
-let provider = new FakeProvider();
-let web3 = new Web3(provider);
-web3.setProvider(provider);
+// let provider = new FakeProvider();
+// let web3 = new Web3(provider);
+// web3.setProvider(provider);
 
 const expected_eth_price = 50
 const expected_btc_price = 500
@@ -41,35 +39,16 @@ beforeEach( () => {
 	btcWrapper = shallow(<BTCPrice btc_price={ expected_btc_price } />)
 	ethWrapper = shallow(<ETHPrice eth_price={ expected_eth_price } />)
 	refreshWrapper = shallow(<RefreshButton fetchBTCPrice={mockFetchBTCPrice} fetchETHPrice={mockFetchETHPrice} />)
-	// transWrapper = shallow(<TransferButton store={store} web3={web3} />)
+	transWrapper = shallow(<TransferButton store={store} />)
 	onFulfilled = sinon.spy()
 	onRejected = sinon.spy()
 })
 
 
-
-// describe('initializes global window', () => {
-// 	it('injects web3 object', () => {
-// 		global = {web3}
-// 		const div = document.createElement('div')
-// 		ReactDOM.render(<TransferButton store={store} web3={web3} />, div)
-// 		ReactDOM.unmountComponentAtNode(div)
-// 		// expect(appWrapper.length).toEqual(1)
-// 	});
-// })
-
 describe('Components render without failing', () => {
 	it('renders the App component', () => {
 		expect(appWrapper.length).toEqual(1)
 	});
-
-	// it('renders the interval statement', () => {
-	// 	// const statement = appWrapper.find('p')
-	// 	const statement = appWrapper.find({ "data-test": "timer-statement" })
-	// 	console.log("statement: ", statement)
-	// 	// expect(statement.dive().text()).toContain("Price updates every")
-	// 	expect("123123").toContain("Price updates every")
-	// })
 
 	it('renders the BTCPrice component', () => {
 		expect(btcWrapper.length).toEqual(1)
@@ -83,9 +62,9 @@ describe('Components render without failing', () => {
 		expect(refreshWrapper.length).toEqual(1)
 	});
 
-	// it('renders the TransferButton component', () => {
-	// 	expect(transWrapper.length).toEqual(1)
-	// });
+	it('renders the TransferButton component', () => {
+		expect(transWrapper.length).toEqual(1)
+	});
 })
 
 
@@ -137,15 +116,15 @@ describe('Verifies button text is displayed', () => {
 	  expect(refreshWrapper.find('button').text()).toEqual('Refresh Price')
 	})
 
-	// it('displays Transfer button text', () => {
-	//   expect(transWrapper.find('button').text()).toContain('Transfer $')
-	// })
+	it('displays Transfer button text', () => {
+	  expect(transWrapper.find('button').text()).toContain('Transfer $')
+	})
 })
 
 
 
 describe('Moxios', () => {
-	it('installs', () => { // This seems to work fine.
+	it('installs', () => { 
 		let defaultAdapter = axios.defaults.adapter
 		moxios.install()
 		expect(axios.defaults.adapter).not.toBe(defaultAdapter)
