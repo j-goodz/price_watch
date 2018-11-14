@@ -11,18 +11,12 @@ import { updateBTCPrice, updateETHPrice } from './actions/index';
 import axios from 'axios';
 import moxios from 'moxios';
 import sinon from 'sinon';
-// import Web3 from 'web3';
-// import FakeProvider from 'web3-fake-provider';
 
 const initialState = {
 	interval: 60,
 	btc_price: 0,
 	eth_price: 0
 }
-
-// let provider = new FakeProvider();
-// let web3 = new Web3(provider);
-// web3.setProvider(provider);
 
 const expected_eth_price = 50
 const expected_btc_price = 500
