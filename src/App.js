@@ -15,7 +15,7 @@ class App extends Component {
     this.tick = this.tick.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     let timer = setInterval(this.tick, 1000 * this.props.interval)
     this.setState({timer})
     this.refreshPrice()
