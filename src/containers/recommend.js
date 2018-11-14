@@ -53,8 +53,8 @@ export class Recommend extends Component {
                     <br /><br />
                     { 
                         this.state.avgPcnt < 60 
-                        ? "BUY! The current price percentage from peak is BELOW 60% which is positive signal." 
-                        : "DON'T BUY! The current price percentage from peak is ABOVE 60% which is a negative signal." 
+                        ? "BUY! The 6 month average price percentage from peak is still BELOW 60% which is a positive signal." 
+                        : "DON'T BUY! The 6 month price percentage from peak is ABOVE 60% which is a negative signal." 
                     }
                 </p>
                 <br />
@@ -112,7 +112,7 @@ export class Recommend extends Component {
                 <br />
                 <p>
                     This price recommendation is based on several concepts. <a href="https://www.investopedia.com/articles/active-trading/070715/making-money-wyckoff-way.asp">Wyckoff Way</a> used to identify historical patterns, <a href="https://en.wikipedia.org/wiki/Hype_cycle">Hype Cycles</a>, and an analysis of Bitcoin price patterns
-                    <br /> during market cycles such as <a href="https://medium.com/@coinscrum/first-anniversary-review-of-the-fractal-relationship-between-bitcoins-first-two-bubbles-and-what-c548eb2647b9"> the fractal relationship between bitcoin's first two bubbles and what they might tell us about a third.</a>
+                     during market cycles such as <a href="https://medium.com/@coinscrum/first-anniversary-review-of-the-fractal-relationship-between-bitcoins-first-two-bubbles-and-what-c548eb2647b9"> the fractal relationship between bitcoin's first two bubbles and what they might tell us about a third.</a>
                 </p>
 
             </div>
