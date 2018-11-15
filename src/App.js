@@ -43,7 +43,7 @@ class App extends Component {
         <BTCPrice btc_price={this.props.btc_price} />
         <ETHPrice eth_price={this.props.eth_price} />
         <br />
-        <RefreshButton props={this.refreshPrice} />
+        <RefreshButton  />
       </div>
     );
   }
