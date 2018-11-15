@@ -4,7 +4,7 @@ export function fetchBTCPrice(){
 	return(dispatch) => {
 		return axios.get('https://api.coinbase.com/v2/prices/BTC-USD/spot').then((res) => {
 			dispatch(updateBTCPrice(res.data.data.amount));
-			// console.log("btc refreshed")
+			console.log("btc refreshed")
 		})
 	}
 }
