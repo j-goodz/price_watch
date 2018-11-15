@@ -23,8 +23,10 @@ class RefreshButton extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state
+	const { fetchBTCPrice, fetchETHPrice } = state
+  	return { fetchBTCPrice, fetchETHPrice }
 }
+
 
 export default connect(mapStateToProps, actionCreators)(RefreshButton)
 
