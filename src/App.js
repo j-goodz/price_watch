@@ -40,14 +40,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Price updates every {this.props.interval} seconds.</p>
+        <p data-test="timer-statement">Price updates every {this.props.interval} seconds.</p>
         <BTCPrice btc_price={this.props.btc_price} />
         <ETHPrice eth_price={this.props.eth_price} />
         <br />
         <RefreshButton  />
 
         <br />
+        <RefreshButton props={this.refreshPrice} />
+
+
+
+
+        <br />
         <TransferButton />
+
 
       </div>
     );

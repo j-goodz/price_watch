@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index';
 
-class RefreshButton extends Component {
+export class RefreshButton extends Component {
 	constructor(props){
 		super(props);
 		this.refreshPrice = this.refreshPrice.bind(this)
@@ -15,9 +15,7 @@ class RefreshButton extends Component {
 
 	render() {
 		return (
-			<div>
-				<button type="button" onClick={this.refreshPrice}>Refresh Price</button>
-			</div>
+				<div><button className="button" type="button" onClick={this.refreshPrice}>Refresh Price</button></div>
 		)
 	}
 }

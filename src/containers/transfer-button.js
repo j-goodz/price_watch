@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Web3 from 'web3';
 
-class TransferButton extends Component {
+export class TransferButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
