@@ -5,11 +5,14 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.24.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.4",
+    "react-stringify": "^1.0.0",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "web3": "^1.0.0-beta.36"
   },
   "scripts": {

@@ -5,11 +5,12 @@ import BTCPrice from './components/btc';
 import ETHPrice from './components/eth';
 import RefreshButton from './containers/refresh-button';
 import TransferButton from './containers/transfer-button';
+import Recommend from './containers/recommend';
 import './App.css';
 
 
 class App extends Component {
-  constructor(props) {
+  constructor(props) { 
     super(props);
     this.state = {
         timer: null
@@ -54,6 +55,8 @@ class App extends Component {
 
         <br />
         <TransferButton />
+        <Recommend />
+
 
 
       </div>
